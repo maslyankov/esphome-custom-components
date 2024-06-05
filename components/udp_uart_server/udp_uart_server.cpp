@@ -29,6 +29,16 @@ void UDPServer::loop() {
     udp_.print(uart_data.c_str());
     udp_.endPacket();
   }
+
+  bool client_connected = udp_.connected();
+  int client_count = udp_.remoteIP().toString() == target_ip_ ? 1 : 0;  // Simplified client count logic
+
+  if (client_connected_ != nullptr) {
+    client_connected_->publish_state(client_connected);
+  }
+  if (client_count_ != nullptr) {
+    client_count_->publish_state(client_count);
+  }
 }
 
 }  // namespace udp_uart_server
