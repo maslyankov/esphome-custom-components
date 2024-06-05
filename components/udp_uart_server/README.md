@@ -58,24 +58,24 @@ ota:
 
 # UART Configuration
 uart:
-  - id: uart1
+  - id: my_uart1
     tx_pin: GPIO1
     rx_pin: GPIO3
     baud_rate: 9600
 
-  - id: uart2
+  - id: my_uart2
     tx_pin: GPIO4
     rx_pin: GPIO5
     baud_rate: 9600
 
 udp_uart_server:
   - id: udp_uart_server_1
-    uart_id: uart1  # Optional, specify if multiple UARTs are configured
+    uart_id: my_uart1  # Optional, specify if multiple UARTs are configured
     ip_address: 192.168.1.100
     port: 1234
 
   - id: udp_uart_server_2
-    uart_id: uart2  # Optional, specify if multiple UARTs are configured
+    uart_id: my_uart2  # Optional, specify if multiple UARTs are configured
     ip_address: 192.168.1.101
     port: 1235
 ```
