@@ -1,3 +1,6 @@
+#ifndef UDP_UART_SERVER_H
+#define UDP_UART_SERVER_H
+
 #include "esphome.h"
 #include <WiFiUdp.h>
 
@@ -26,8 +29,9 @@ class UDPServer : public Component, public uart::UARTDevice {
       }
     }
 
-    if (available()) {
-      std::string uart_data = read_string();
+    while (available()) {
+      std::string uart_data;
+      read_line(&uart_data);
       udp_.beginPacket(target_ip_.c_str(), port_);
       udp_.print(uart_data.c_str());
       udp_.endPacket();
@@ -42,3 +46,5 @@ class UDPServer : public Component, public uart::UARTDevice {
 
 }  // namespace udp_uart_server
 }  // namespace esphome
+
+#endif  // UDP_UART_SERVER_H

@@ -23,8 +23,9 @@ void UDPServer::loop() {
     }
   }
 
-  if (available()) {
-    std::string uart_data = read_string();
+  while (available()) {
+    std::string uart_data;
+    read_line(&uart_data);
     udp_.beginPacket(target_ip_.c_str(), port_);
     udp_.print(uart_data.c_str());
     udp_.endPacket();
